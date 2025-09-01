@@ -1,0 +1,80 @@
+var timeline = [];
+
+var preload = {
+    type: 'preload',
+    auto_preload: true 
+}
+timeline.push(preload);
+
+var Welcome = {
+   type: 'html-button-response',
+   stimulus: '<p>Welcome to the experiment!</p>',
+ choices: ['Begin']
+ }
+ 
+ timeline.push(Welcome);
+ 
+/////////////// Eksperiment ///////////
+
+        // Add all trials to a timeline array
+     
+        var stimuli2 = [
+            'MKavan_SR.mp3',
+            'FRejav_SR.mp3',
+            'FRejav_LF.mp3',
+            'FKavan_SF.mp3',
+            'MKavan_LF.mp3',
+            'MRejav_SF.mp3',
+            'FKavan_LR.mp3',
+            'MRejav_LR.mp3',
+        ]
+        
+   var instructions2 = {
+            type: 'instructions',
+            pages: [
+            `<p> Listen and group the items based on their similarity. The more similar, the closer they should be.<p/>`,
+            ],
+            show_clickable_nav: true,
+            response_ends_trial: true
+        }      
+        
+        var similarity_testing1 = {
+            type: 'audio-tokens',
+            ratingtype: 'similarity',
+            stimuli: stimuli2,
+            force_listen: false,
+            loop: false,
+            draw_edges: true
+        }
+
+        // Add all trials to a timeline array
+        var good2 = { 
+          timeline: [
+            instructions2,
+            similarity_testing1
+        ]
+        };
+        timeline.push(good2);
+        
+  
+ 
+   
+   var ending = {
+    type: 'html-button-response',
+    stimulus: `Thank you, the demo has been completed. If you are interested in the task, send an email to Dusan, the researcher at: dusan.nikolic1@alumni.ucalgary.ca.<br><br>`,
+    choices: ['Press here to finish'],
+   on_finish: function(){
+       jsPsych.endExperiment(`You may close this page. Thank you!`);
+  },
+};
+
+timeline.push(ending);
+
+        jsPsych.init({
+            timeline: timeline,
+            show_preload_progress_bar: true,
+            message_progress_bar: "My progress",
+            show_progress_bar: true,
+            use_webaudio: false,
+            case_sensitive_responses: true,
+        })
