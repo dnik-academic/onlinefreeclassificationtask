@@ -8,31 +8,44 @@ timeline.push(preload);
 
 var Welcome = {
    type: 'html-button-response',
-   stimulus: '<p>Welcome to the experiment!</p>',
+   stimulus: '<p>Welcome to the demo of the experiment!</p>',
  choices: ['Begin']
  }
  
  timeline.push(Welcome);
+ 
+
  
 /////////////// Eksperiment ///////////
 
         // Add all trials to a timeline array
      
         var stimuli2 = [
-            'MKavan_SR.mp3',
-            'FRejav_SR.mp3',
-            'FRejav_LF.mp3',
-            'FKavan_SF.mp3',
-            'MKavan_LF.mp3',
-            'MRejav_SF.mp3',
             'FKavan_LR.mp3',
-            'MRejav_LR.mp3',
+            'MKavan_SR.mp3',
+            'FKavan_LF.mp3',
+            'MKavan_SF.mp3',
+            'FRejav_SR.mp3',
+            'MRejav_LF.mp3',
+            'FRejav_SF.mp3',
+            'MRejav_LR.mp3'
+          
+            
         ]
-        
+   
+   var instructions1 = {
+            type: 'instructions',
+            pages: [
+            `<p> You will see a big hollow circle and eight smaller circles around it. Hover over each circle to listen to it.<p/>`,
+            ],
+            show_clickable_nav: true,
+            response_ends_trial: true
+        }           
+   
    var instructions2 = {
             type: 'instructions',
             pages: [
-            `<p> Listen and group the items based on their similarity. The more similar, the closer they should be.<p/>`,
+            `<p> Listen and group the items based on their similarity. Simply drag the circles inside. The more similar, the closer they should be.<p/>`,
             ],
             show_clickable_nav: true,
             response_ends_trial: true
@@ -42,7 +55,7 @@ var Welcome = {
             type: 'audio-tokens',
             ratingtype: 'similarity',
             stimuli: stimuli2,
-            force_listen: false,
+            force_listen: true,
             loop: false,
             draw_edges: true
         }
@@ -50,6 +63,7 @@ var Welcome = {
         // Add all trials to a timeline array
         var good2 = { 
           timeline: [
+            instructions1,
             instructions2,
             similarity_testing1
         ]
@@ -61,7 +75,7 @@ var Welcome = {
    
    var ending = {
     type: 'html-button-response',
-    stimulus: `Thank you, the demo has been completed. If you are interested in the task, send an email to Dusan, the researcher at: dusan.nikolic1@alumni.ucalgary.ca.<br><br>`,
+    stimulus: `Thank you, the demo has been completed.<br><br>`,
     choices: ['Press here to finish'],
    on_finish: function(){
        jsPsych.endExperiment(`You may close this page. Thank you!`);
