@@ -1,0 +1,222 @@
+// FREE CLASSIFICATION TASK
+// This is one of the pre-test tasks. The exact combination of voices used as the stimuli depended on which participant was doing the task, so that all voices were counterbalanced.
+// This is run with jsPsych 6.3. These external JS/CSS files were loaded in:
+// jspsych-htlm-keyboard-response.js
+// jspsych-instructions.js
+// jspsych-preload.js
+// jspsych-audio-tokens-v7.js
+// jspsych-audio-tokens.js
+// jspsych-htlm-button-response.js
+// d3.js
+// audio-tokens.js
+
+var timeline = [];
+
+var preload = {
+    type: 'preload',
+    auto_preload: true 
+}
+timeline.push(preload);
+
+/////////// PARTICIPANT INSTRUCTIONS ///////////
+
+var Instructions = {
+   type: 'html-button-response',
+   stimulus: '<p>You will see a circle with many bubbles around it. When you mouse over a bubble, an Anatolian word will play. You can drag and drop the bubbles into the circle. Your task is to organize the words according to their *vowels*.</p>'+
+   '<p>Please ensure that your volume is turned up.</p>'+
+   '<p>Press "begin" to begin.</p>',
+ choices: ['Begin']
+ }
+ timeline.push(Instructions);
+ 
+/////////// CRITICAL TASK ///////////
+
+// Circle 1 
+var stimuli1 = [
+            'voice2_fyZ_61.wav',
+            'voice2_fiZ_61.wav',
+            'voice2_fuZ_61.wav',
+            'voice2_fWZ_61.wav',
+            'voice2_bys_61.wav',
+            'voice2_bis_61.wav',
+            'voice2_bus_61.wav',
+            'voice2_bWs_61.wav',
+            'voice2_dyf_61.wav',
+            'voice2_dif_61.wav',
+            'voice2_duf_61.wav',
+            'voice2_dWf_61.wav',
+            'voice2_vyS_61.wav',
+            'voice2_viS_61.wav',
+            'voice2_vuS_61.wav',
+            'voice2_vWS_61.wav',
+            ]
+            
+        var similarity_testing1 = {
+            type: 'audio-tokens',
+            ratingtype: 'similarity',
+            stimuli: stimuli1,
+            force_listen: false,
+            loop: false,
+            draw_edges: true
+        }
+
+        // Add all trials to a timeline array
+        var good1 = { 
+          timeline: [
+            
+            similarity_testing1
+        ]
+        };
+        timeline.push(good1);
+
+// Circle 2 
+var stimuli2 = [
+            'voice2_syf_61.wav',
+            'voice2_sif_61.wav',
+            'voice2_suf_61.wav',
+            'voice2_sWf_61.wav',
+            'voice2_zyg_61.wav',
+            'voice2_zig_61.wav',
+            'voice2_zug_61.wav',
+            'voice2_zWg_61.wav',
+            'voice2_tSyv_61.wav',
+            'voice2_tSiv_61.wav',
+            'voice2_tSuv_61.wav',
+            'voice2_tSWv_61.wav',
+            'voice2_nym_61.wav',
+            'voice2_nim_61.wav',
+            'voice2_num_61.wav',
+            'voice2_nWm_61.wav',
+        ]
+        
+        var similarity_testing2 = {
+            type: 'audio-tokens',
+            ratingtype: 'similarity',
+            stimuli: stimuli2,
+            force_listen: false,
+            loop: false,
+            draw_edges: true
+        }
+        
+        var good2 = { 
+          timeline: [
+            
+            similarity_testing2
+        ]
+        };
+        timeline.push(good2);
+
+/////////// FILLER TASK ///////////
+
+var Instructions2 = {
+   type: 'html-button-response',
+   stimulus: '<p>You will see a circle with many bubbles around it. When you mouse over a bubble, an English word will play. You can drag and drop the bubbles into the circle. Your task is to organize the words according to their *meanings*.</p>'+
+   '<p>Press "begin" to begin.</p>',
+ choices: ['Begin']
+ }
+ timeline.push(Instructions2);
+
+// Circle 1 
+var stimuli3 = [
+            'charys_tomato.wav',
+            'charys_potato.wav',
+            'charys_rain.wav',
+            'charys_plate.wav',
+            'charys_dolphin.wav',
+            'charys_octopus.wav',
+            'charys_penguin.wav',
+            'charys_bicycle.wav',
+            'charys_passport.wav',
+            'charys_airplane.wav',
+            'charys_forest.wav',
+            'charys_bookstore.wav',
+            'charys_library.wav',
+            'charys_mirror.wav',
+            'charys_calendar.wav',
+            'charys_museum.wav',
+        ]
+        
+        var similarity_testing3 = {
+            type: 'audio-tokens',
+            ratingtype: 'similarity',
+            stimuli: stimuli3,
+            force_listen: false,
+            loop: false,
+            draw_edges: true
+        }
+        
+        var good3 = { 
+          timeline: [
+            
+            similarity_testing3
+        ]
+        };
+        timeline.push(good3);
+
+// Circle 2 
+
+var stimuli4 = [
+            'charys_photo.wav',
+            'charys_castle.wav',
+            'charys_lawyer.wav',
+            'charys_paper.wav',
+            'charys_desk.wav',
+            'charys_coin.wav',
+            'charys_oasis.wav',
+            'charys_desert.wav',
+            'charys_river.wav',
+            'charys_hospital.wav',
+            'charys_doctor.wav',
+            'charys_microscope.wav',
+            'charys_rocket.wav',
+            'charys_planet.wav',
+            'charys_fork.wav',
+            'charys_bottle.wav',
+        ]
+        
+        var similarity_testing4 = {
+            type: 'audio-tokens',
+            ratingtype: 'similarity',
+            stimuli: stimuli4,
+            force_listen: false,
+            loop: false,
+            draw_edges: true
+        }
+        
+        var good4 = { 
+          timeline: [
+            
+            similarity_testing4
+        ]
+        };
+        timeline.push(good4);
+
+
+/////////// END EXPERIMENT ///////////
+
+    var block = {
+    type: 'html-keyboard-response',
+    choices: ['a', 'A'], 
+  stimulus: '<p>Press [a] to complete the experiment.</p>',
+    stimulus_width: 300,
+    data: {
+              correct_response: 'a',
+    },
+    on_finish: function(data) {
+      if (data.response.toLowerCase() == data.correct_response) {
+        jsPsych.endExperiment('Thank you for participating! Please proceed to Part 2 <a href="https://sarcastirony.ca/students/preAX/pretest-subject33-speaker2.html">here</a>.');
+      }
+    }
+        };
+   timeline.push(block);
+  
+    
+        jsPsych.init({
+            timeline: timeline,
+          
+            show_preload_progress_bar: true,
+            message_progress_bar: "My progress",
+            show_progress_bar: true,
+            use_webaudio: false,
+            case_sensitive_responses: true,
+        })
