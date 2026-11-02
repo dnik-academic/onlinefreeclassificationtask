@@ -1,0 +1,461 @@
+\documentclass{scrreprt}
+
+\makeatletter
+
+\usepackage{color}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0}
+\definecolor{editorGreen}{rgb}{0, 0.5, 0}
+\definecolor{orange}{rgb}{1,0.45,0.13}
+\definecolor{olive}{rgb}{0.17,0.59,0.20}
+\definecolor{brown}{rgb}{0.69,0.31,0.31}
+\definecolor{purple}{rgb}{0.38,0.18,0.81}
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}
+\definecolor{lightred}{rgb}{1,0.4,0.5}
+
+\usepackage{upquote}
+\usepackage{listings}
+
+% CSS
+\lstdefinelanguage{CSS}{
+  keywords={color,background-image:,margin,padding,font,weight,display,
+  position,top,left,right,bottom,list,style,border,size,white,space,
+  min,width,transition:,transform:,transition-property,
+  transition-duration,transition-timing-function},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]`,
+  alsoletter={:},
+  alsodigit={-}
+}
+
+% JavaScript
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof,new,true,false,catch,function,return,null,switch,
+  var,let,const,if,in,while,do,else,case,break},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]`,
+  morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,
+  alsoletter={<>=-},
+  morecomment=[s]{<!-}{-->},
+  tag=[s],
+  otherkeywords={
+    >,
+    <!DOCTYPE,
+    </html, <html, <head, <title, </title, <style, </style, <link,
+    </head, <meta, />,
+    </body, <body,
+    </div, <div, </div>,
+    </p, <p, </p>,
+    </script, <script,
+    <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>,
+    </svg>, <video, <source, <iframe, </iframe>, </video>,
+    <image, </image>, <header, </header, <article, </article
+  },
+  ndkeywords={
+    =,
+    charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+    fill=, attributeName=, begin=, dur=, from=, to=, poster=,
+    controls=, x=, y=, repeatCount=, xlink:href=,
+    margin:, padding:, background-image:, border:, top:, left:,
+    position:, width:, height:, margin-top:, margin-bottom:,
+    font-size:, line-height:,
+    transform:, -moz-transform:, -webkit-transform:,
+    animation:, -webkit-animation:,
+    transition:, transition-duration:, transition-property:,
+    transition-timing-function:
+  }
+}
+
+\lstdefinestyle{htmlcssjs}{%
+  basicstyle={\footnotesize\ttfamily},
+  frame=b,
+  xleftmargin={0.75cm},
+  numbers=left,
+  stepnumber=1,
+  firstnumber=1,
+  numberfirstline=true,
+  identifierstyle=\color{black},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{editorGreen}\bfseries,
+  stringstyle=\color{editorOcher}\ttfamily,
+  commentstyle=\color{brown}\ttfamily,
+  language=HTML5,
+  alsolanguage=JavaScript,
+  alsodigit={.:;},
+  tabsize=2,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  extendedchars=true,
+  breaklines=true,
+  literate=%
+    {Ö}{{\`O}}1
+    {Ä}{{\`A}}1
+    {Ü}{{\`U}}1
+    {ß}{{\ss}}1
+    {ü}{{\`u}}1
+    {ä}{{\`a}}1
+    {ö}{{\`o}}1
+}
+
+\makeatother
+
+\begin{document}
+
+\chapter{Experimental Code}
+
+\section{Experiment 1: Lexical Pitch Accent Classification}
+
+\begin{lstlisting}[style=htmlcssjs]
+var timeline = [];
+
+var preload = {
+    type: 'preload',
+    auto_preload: true
+}
+timeline.push(preload);
+
+var Welcome = {
+   type: 'html-button-response',
+   stimulus: '<p>Welcome to the demo of the experiment!</p>',
+   choices: ['Begin']
+}
+
+timeline.push(Welcome);
+
+/////////////// Experiment ///////////
+
+// Add all trials to a timeline array
+
+var stimuli2 = [
+    'FKavan_LR.mp3',
+    'MKavan_SR.mp3',
+    'FKavan_LF.mp3',
+    'MKavan_SF.mp3',
+    'FRejav_SR.mp3',
+    'MRejav_LF.mp3',
+    'FRejav_SF.mp3',
+    'MRejav_LR.mp3'
+]
+
+var instructions1 = {
+    type: 'instructions',
+    pages: [
+        `<p>You will see a big hollow circle and eight smaller circles
+        around it. Hover over each circle to listen to it.</p>`,
+    ],
+    show_clickable_nav: true,
+    response_ends_trial: true
+}
+
+var instructions2 = {
+    type: 'instructions',
+    pages: [
+        `<p>Listen and group the items based on their similarity.
+        Simply drag the circles inside. The more similar, the closer
+        they should be.</p>`,
+    ],
+    show_clickable_nav: true,
+    response_ends_trial: true
+}
+
+var similarity_testing1 = {
+    type: 'audio-tokens',
+    ratingtype: 'similarity',
+    stimuli: stimuli2,
+    force_listen: true,
+    loop: false,
+    draw_edges: true
+}
+
+// Add all trials to a timeline array
+var good2 = {
+    timeline: [
+        instructions1,
+        instructions2,
+        similarity_testing1
+    ]
+};
+
+timeline.push(good2);
+
+var ending = {
+    type: 'html-button-response',
+    stimulus: `Thank you, the demo has been completed.<br><br>`,
+    choices: ['Press here to finish'],
+    on_finish: function() {
+        jsPsych.endExperiment(`You may close this page. Thank you!`);
+    },
+};
+
+timeline.push(ending);
+
+jsPsych.init({
+    timeline: timeline,
+    show_preload_progress_bar: true,
+    message_progress_bar: `My progress`,
+    show_progress_bar: true,
+    use_webaudio: false,
+    case_sensitive_responses: true,
+})
+\end{lstlisting}
+
+\clearpage
+
+\section{Experiment 2: Vowel Free-Classification Task}
+
+\begin{lstlisting}[style=htmlcssjs]
+// FREE CLASSIFICATION TASK
+// This is one of the pre-test tasks. The exact combination of voices
+// used as the stimuli depended on which participant was doing the task,
+// so that all voices were counterbalanced.
+
+// This is run with jsPsych 6.3. These external JS/CSS files were loaded in:
+// jspsych-html-keyboard-response.js
+// jspsych-instructions.js
+// jspsych-preload.js
+// jspsych-audio-tokens-v7.js
+// jspsych-audio-tokens.js
+// jspsych-html-button-response.js
+// d3.js
+// audio-tokens.js
+
+var timeline = [];
+
+var preload = {
+    type: 'preload',
+    auto_preload: true
+}
+timeline.push(preload);
+
+/////////// PARTICIPANT INSTRUCTIONS ///////////
+
+var Instructions = {
+    type: 'html-button-response',
+    stimulus:
+        '<p>You will see a circle with many bubbles around it. ' +
+        'When you mouse over a bubble, an Anatolian word will play. ' +
+        'You can drag and drop the bubbles into the circle. ' +
+        'Your task is to organize the words according to their vowels.</p>' +
+        '<p>Please ensure that your volume is turned up.</p>' +
+        '<p>Press `begin` to begin.</p>',
+    choices: ['Begin']
+}
+
+timeline.push(Instructions);
+
+/////////// CRITICAL TASK ///////////
+
+// Circle 1
+
+var stimuli1 = [
+    'voice2_fyZ_61.wav',
+    'voice2_fiZ_61.wav',
+    'voice2_fuZ_61.wav',
+    'voice2_fWZ_61.wav',
+    'voice2_bys_61.wav',
+    'voice2_bis_61.wav',
+    'voice2_bus_61.wav',
+    'voice2_bWs_61.wav',
+    'voice2_dyf_61.wav',
+    'voice2_dif_61.wav',
+    'voice2_duf_61.wav',
+    'voice2_dWf_61.wav',
+    'voice2_vyS_61.wav',
+    'voice2_viS_61.wav',
+    'voice2_vuS_61.wav',
+    'voice2_vWS_61.wav'
+]
+
+var similarity_testing1 = {
+    type: 'audio-tokens',
+    ratingtype: 'similarity',
+    stimuli: stimuli1,
+    force_listen: false,
+    loop: false,
+    draw_edges: true
+}
+
+var good1 = {
+    timeline: [
+        similarity_testing1
+    ]
+};
+
+timeline.push(good1);
+
+// Circle 2
+
+var stimuli2 = [
+    'voice2_syf_61.wav',
+    'voice2_sif_61.wav',
+    'voice2_suf_61.wav',
+    'voice2_sWf_61.wav',
+    'voice2_zyg_61.wav',
+    'voice2_zig_61.wav',
+    'voice2_zug_61.wav',
+    'voice2_zWg_61.wav',
+    'voice2_tSyv_61.wav',
+    'voice2_tSiv_61.wav',
+    'voice2_tSuv_61.wav',
+    'voice2_tSWv_61.wav',
+    'voice2_nym_61.wav',
+    'voice2_nim_61.wav',
+    'voice2_num_61.wav',
+    'voice2_nWm_61.wav'
+]
+
+var similarity_testing2 = {
+    type: 'audio-tokens',
+    ratingtype: 'similarity',
+    stimuli: stimuli2,
+    force_listen: false,
+    loop: false,
+    draw_edges: true
+}
+
+var good2 = {
+    timeline: [
+        similarity_testing2
+    ]
+};
+
+timeline.push(good2);
+
+/////////// FILLER TASK ///////////
+
+var Instructions2 = {
+    type: 'html-button-response',
+    stimulus:
+        '<p>You will see a circle with many bubbles around it. ' +
+        'When you mouse over a bubble, an English word will play. ' +
+        'You can drag and drop the bubbles into the circle. ' +
+        'Your task is to organize the words according to their meanings.</p>' +
+        '<p>Press `begin` to begin.</p>',
+    choices: ['Begin']
+}
+
+timeline.push(Instructions2);
+
+// Circle 1
+
+var stimuli3 = [
+    'charys_tomato.wav',
+    'charys_potato.wav',
+    'charys_rain.wav',
+    'charys_plate.wav',
+    'charys_dolphin.wav',
+    'charys_octopus.wav',
+    'charys_penguin.wav',
+    'charys_bicycle.wav',
+    'charys_passport.wav',
+    'charys_airplane.wav',
+    'charys_forest.wav',
+    'charys_bookstore.wav',
+    'charys_library.wav',
+    'charys_mirror.wav',
+    'charys_calendar.wav',
+    'charys_museum.wav'
+]
+
+var similarity_testing3 = {
+    type: 'audio-tokens',
+    ratingtype: 'similarity',
+    stimuli: stimuli3,
+    force_listen: false,
+    loop: false,
+    draw_edges: true
+}
+
+var good3 = {
+    timeline: [
+        similarity_testing3
+    ]
+};
+
+timeline.push(good3);
+
+// Circle 2
+
+var stimuli4 = [
+    'charys_photo.wav',
+    'charys_castle.wav',
+    'charys_lawyer.wav',
+    'charys_paper.wav',
+    'charys_desk.wav',
+    'charys_coin.wav',
+    'charys_oasis.wav',
+    'charys_desert.wav',
+    'charys_river.wav',
+    'charys_hospital.wav',
+    'charys_doctor.wav',
+    'charys_microscope.wav',
+    'charys_rocket.wav',
+    'charys_planet.wav',
+    'charys_fork.wav',
+    'charys_bottle.wav'
+]
+
+var similarity_testing4 = {
+    type: 'audio-tokens',
+    ratingtype: 'similarity',
+    stimuli: stimuli4,
+    force_listen: false,
+    loop: false,
+    draw_edges: true
+}
+
+var good4 = {
+    timeline: [
+        similarity_testing4
+    ]
+};
+
+timeline.push(good4);
+
+/////////// END EXPERIMENT ///////////
+
+var block = {
+    type: 'html-keyboard-response',
+    choices: ['a', 'A'],
+    stimulus: '<p>Press [a] to complete the experiment.</p>',
+    stimulus_width: 300,
+    data: {
+        correct_response: 'a',
+    },
+    on_finish: function(data) {
+        if (data.response.toLowerCase() == data.correct_response) {
+            jsPsych.endExperiment(
+                'Thank you for participating! Please proceed to Part 2 ' +
+                '<a href=`https://sarcastirony.ca/students/preAX/' +
+                'pretest-subject33-speaker2.html`>here</a>.'
+            );
+        }
+    }
+};
+
+timeline.push(block);
+
+jsPsych.init({
+    timeline: timeline,
+    show_preload_progress_bar: true,
+    message_progress_bar: `My progress`,
+    show_progress_bar: true,
+    use_webaudio: false,
+    case_sensitive_responses: true,
+})
+\end{lstlisting}
+
+\end{document}
